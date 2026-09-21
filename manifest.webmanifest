@@ -2,6 +2,7 @@
   "name": "Winetime Asia — Wine & Spirits Cambodia",
   "short_name": "Winetime",
   "description": "Official wine and spirits distributor in Cambodia. Discover wines, plan your event, and shop the collection.",
+  "id": "./",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
