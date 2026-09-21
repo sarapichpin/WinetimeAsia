@@ -1,11 +1,156 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.winetime.asia/</loc></url>
-  <url><loc>https://www.winetime.asia/about.html</loc></url>
-  <url><loc>https://www.winetime.asia/event-wedding.html</loc></url>
-  <url><loc>https://www.winetime.asia/bar-a-vin.html</loc></url>
-  <url><loc>https://www.winetime.asia/contact.html</loc></url>
-  <url><loc>https://www.winetime.asia/blog.html</loc></url>
-  <url><loc>https://www.winetime.asia/forum.html</loc></url>
-  <url><loc>https://www.winetime.asia/cookie-policy.html</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.winetime.asia/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.winetime.asia/"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/about.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/about.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.winetime.asia/about.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/event-wedding.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/event-wedding.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/event-wedding.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/event-wedding.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.winetime.asia/event-wedding.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/bar-a-vin.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/bar-a-vin.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/bar-a-vin.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/bar-a-vin.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.winetime.asia/bar-a-vin.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.winetime.asia/contact.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/blog.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.winetime.asia/blog.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/forum.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/forum.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/forum.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/forum.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.winetime.asia/forum.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/cookie-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/cookie-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/cookie-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.winetime.asia/cookie-policy.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/fr/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/index.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.winetime.asia/"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/fr/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/about.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/about.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/about.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/fr/event-wedding.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/event-wedding.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/event-wedding.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/event-wedding.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/fr/bar-a-vin.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/bar-a-vin.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/bar-a-vin.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/bar-a-vin.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/fr/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/contact.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/fr/blog.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/blog.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/fr/forum.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/forum.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/forum.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/forum.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/fr/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/cookie-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/cookie-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/cookie-policy.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/zh/index.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/index.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/index.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/zh/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/about.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/about.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/about.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/zh/event-wedding.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/event-wedding.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/event-wedding.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/event-wedding.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/zh/bar-a-vin.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/bar-a-vin.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/bar-a-vin.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/bar-a-vin.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/zh/contact.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/contact.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/zh/blog.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/blog.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/blog.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/zh/forum.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/forum.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/forum.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/forum.html"/>
+  </url>
+  <url>
+    <loc>https://www.winetime.asia/zh/cookie-policy.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/cookie-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/cookie-policy.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/cookie-policy.html"/>
+  </url>
 </urlset>

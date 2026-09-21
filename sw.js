@@ -3,7 +3,7 @@
  * App-shell caching for offline-friendly browsing.
  * Bump CACHE_VERSION whenever precached files change.
  */
-const CACHE_VERSION = "wt-v2";
+const CACHE_VERSION = "wt-v3";
 const STATIC_CACHE = CACHE_VERSION + "-static";
 const PAGES_CACHE = CACHE_VERSION + "-pages";
 
@@ -27,7 +27,23 @@ const PRECACHE_URLS = [
   "./icons/icon-maskable-512.png",
   "./icons/logo-horizontal.png",
   "./icons/favicon-48.png",
-  "./icons/apple-touch-icon.png"
+  "./icons/apple-touch-icon.png",
+  "./fr/index.html",
+  "./fr/about.html",
+  "./fr/event-wedding.html",
+  "./fr/bar-a-vin.html",
+  "./fr/contact.html",
+  "./fr/blog.html",
+  "./fr/forum.html",
+  "./fr/cookie-policy.html",
+  "./zh/index.html",
+  "./zh/about.html",
+  "./zh/event-wedding.html",
+  "./zh/bar-a-vin.html",
+  "./zh/contact.html",
+  "./zh/blog.html",
+  "./zh/forum.html",
+  "./zh/cookie-policy.html"
 ];
 
 self.addEventListener("install", (event) => {

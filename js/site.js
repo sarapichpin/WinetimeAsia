@@ -1,15 +1,24 @@
 /*!
  * Winetime Asia — shared site behavior
- * Injects header/footer, wires navigation, carousels, forms, PWA install
- * and service-worker registration. No build step, no dependencies.
+ * Injects header/footer, wires navigation, carousels, forms, PWA install,
+ * i18n chrome (EN/FR/ZH) and service-worker registration. No build step.
  */
 (function () {
   "use strict";
 
   var SHOP_URL = "https://winetime-asia.odoo.com/shop";
+  var INTRANET_URL = "https://www.winetime-asia.odoo.com";
   var PHONE = "+855 85 31 32 03";
   var PHONE_HREF = "tel:+855853132 03".replace(/\s/g, "");
   var EMAIL = "sale@winetime.asia";
+  var LOCALES = ["en", "fr", "zh"];
+  var LOCALE_SHORT = { en: "EN", fr: "FR", zh: "中文" };
+  var LOCALE_NAME = { en: "English", fr: "Français", zh: "中文" };
+  var PAGE_FILE = {
+    home: "index.html", about: "about.html", event: "event-wedding.html",
+    bar: "bar-a-vin.html", contact: "contact.html", blog: "blog.html",
+    forum: "forum.html", cookie: "cookie-policy.html"
+  };
 
   /* ------------------------------------------------------------------ */
   /* Icons (inline SVG strings, stroke-based, brand-neutral)             */
@@ -28,31 +37,128 @@
     ig: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>',
     yt: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.5 7.2s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.3-1C16.3 3.6 12 3.6 12 3.6h0s-4.3 0-7.3.3c-.4 0-1.4.1-2.3 1-.7.7-.9 2.3-.9 2.3S1.2 9 1.2 10.9v2.1c0 1.9.3 3.7.3 3.7s.2 1.6.9 2.3c.9.9 2 .9 2.5 1 1.8.2 7.1.3 7.1.3s4.3 0 7.3-.3c.4 0 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.3-1.8.3-3.7v-2.1c0-1.9-.3-3.7-.3-3.7zM9.8 14.9V8.9l5.7 3-5.7 3z"/></svg>',
     cart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 3h2l2.6 12.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6"/></svg>',
-    check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>'
+    check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>',
+    globe: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/></svg>',
+    intranet: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg>'
   };
 
   /* ------------------------------------------------------------------ */
-  /* Navigation model (single source of truth for header + drawer)       */
+  /* Translations (site chrome only — page body copy lives per file)     */
   /* ------------------------------------------------------------------ */
-  var NAV = [
-    { key: "home", label: "Home", href: "index.html" },
-    { key: "shop", label: "Shop", href: SHOP_URL, external: true, shop: true },
-    { key: "event", label: "Event &amp; Wedding", href: "event-wedding.html" },
-    { key: "bar", label: "Bar &agrave; Vin", href: "bar-a-vin.html" },
-    { key: "about", label: "About", href: "about.html" },
-    { key: "communities", label: "Communities", children: [
-      { key: "blog", label: "Blog", href: "blog.html" },
-      { key: "forum", label: "Forum", href: "forum.html" }
-    ] },
-    { key: "contact", label: "Contact us", href: "contact.html" }
-  ];
+  var I18N = {
+    en: {
+      navHome: "Home", navShop: "Shop", navEvent: "Event &amp; Wedding", navBar: "Bar &agrave; Vin", navAbout: "About",
+      navCommunities: "Communities", navBlog: "Blog", navForum: "Forum", navContact: "Contact us", navIntranet: "Intranet",
+      shopAria: "opens the official Winetime shop in a new tab",
+      intranetAria: "opens the Winetime intranet in a new tab",
+      callAria: "Call Winetime Asia", shopIconAria: "Open the Winetime shop",
+      openMenuAria: "Open menu", closeMenuAria: "Close menu", menuDialogAria: "Menu",
+      shopCollectionCta: "Shop the collection", langLabel: "Language",
+      footerBrandTitle: "We are Winetime&hellip;",
+      footerBlockquote: "Winetime Cambodia is your official distributor of quality wines and spirits, proudly offering an unparalleled range of products paired with the best service, every time.",
+      footerExplore: "Explore", footerHome: "Home", footerAboutUs: "About us", footerEvent: "Event &amp; Wedding", footerBar: "Bar &agrave; Vin",
+      footerCommunity: "Community", footerBlog: "Blog", footerForum: "Forum", footerShopCollection: "Shop the collection", footerContact: "Contact us",
+      footerGetInTouch: "Get in touch", footerBasedIn: "Phnom Penh, Cambodia",
+      footerCookiePolicy: "Cookie Policy", footerBackToTop: "Back to top", footerIntranet: "Intranet",
+      footerRights: "All rights reserved.",
+      cookieText: "We use a few essential cookies to make this site work, plus optional analytics to improve it. See our <a href=\"{cookieHref}\" style=\"color:#fff;text-decoration:underline;\">Cookie Policy</a>.",
+      cookieDecline: "Decline", cookieAccept: "Accept", cookieAria: "Cookie notice",
+      installTitle: "Install Winetime Asia", installBody: "Add the app to your home screen for faster, offline-friendly browsing.",
+      installNotNow: "Not now", installGo: "Install",
+      finderPick: "Pick a style to narrow down the shop search &mdash; or browse everything.",
+      finderSearching: "Searching for <strong>{terms}</strong> in the shop",
+      backToTopAria: "Back to top",
+      mailtoThanks: "Thanks! Your email app is opening with your message pre-filled to {email}.",
+      goToSlide: "Go to slide {n}"
+    },
+    fr: {
+      navHome: "Accueil", navShop: "Boutique", navEvent: "Événement &amp; Mariage", navBar: "Bar &agrave; Vin", navAbout: "À propos",
+      navCommunities: "Communauté", navBlog: "Blog", navForum: "Forum", navContact: "Contact", navIntranet: "Intranet",
+      shopAria: "ouvre la boutique officielle Winetime dans un nouvel onglet",
+      intranetAria: "ouvre l'intranet Winetime dans un nouvel onglet",
+      callAria: "Appeler Winetime Asia", shopIconAria: "Ouvrir la boutique Winetime",
+      openMenuAria: "Ouvrir le menu", closeMenuAria: "Fermer le menu", menuDialogAria: "Menu",
+      shopCollectionCta: "Découvrir la boutique", langLabel: "Langue",
+      footerBrandTitle: "Nous sommes Winetime&hellip;",
+      footerBlockquote: "Winetime Cambodge est votre distributeur officiel de vins et spiritueux de qualité, fier de proposer une gamme inégalée de produits alliée au meilleur service, à chaque fois.",
+      footerExplore: "Explorer", footerHome: "Accueil", footerAboutUs: "À propos", footerEvent: "Événement &amp; Mariage", footerBar: "Bar &agrave; Vin",
+      footerCommunity: "Communauté", footerBlog: "Blog", footerForum: "Forum", footerShopCollection: "Découvrir la boutique", footerContact: "Contact",
+      footerGetInTouch: "Nous contacter", footerBasedIn: "Phnom Penh, Cambodge",
+      footerCookiePolicy: "Politique de cookies", footerBackToTop: "Retour en haut", footerIntranet: "Intranet",
+      footerRights: "Tous droits réservés.",
+      cookieText: "Nous utilisons quelques cookies essentiels au fonctionnement du site, ainsi que des cookies analytiques facultatifs pour l'améliorer. Voir notre <a href=\"{cookieHref}\" style=\"color:#fff;text-decoration:underline;\">politique de cookies</a>.",
+      cookieDecline: "Refuser", cookieAccept: "Accepter", cookieAria: "Avis relatif aux cookies",
+      installTitle: "Installer Winetime Asia", installBody: "Ajoutez l'application à votre écran d'accueil pour une navigation plus rapide, même hors ligne.",
+      installNotNow: "Plus tard", installGo: "Installer",
+      finderPick: "Choisissez un style pour affiner la recherche dans la boutique &mdash; ou parcourez tout le catalogue.",
+      finderSearching: "Recherche de <strong>{terms}</strong> dans la boutique",
+      backToTopAria: "Retour en haut",
+      mailtoThanks: "Merci ! Votre application e-mail s'ouvre avec votre message pré-rempli à destination de {email}.",
+      goToSlide: "Aller à la diapositive {n}"
+    },
+    zh: {
+      navHome: "首页", navShop: "商店", navEvent: "活动与婚礼", navBar: "品酒吧", navAbout: "关于我们",
+      navCommunities: "社区", navBlog: "博客", navForum: "论坛", navContact: "联系我们", navIntranet: "内部系统",
+      shopAria: "在新标签页中打开 Winetime 官方商店",
+      intranetAria: "在新标签页中打开 Winetime 内部系统",
+      callAria: "致电 Winetime Asia", shopIconAria: "打开 Winetime 商店",
+      openMenuAria: "打开菜单", closeMenuAria: "关闭菜单", menuDialogAria: "菜单",
+      shopCollectionCta: "选购精选葡萄酒", langLabel: "语言",
+      footerBrandTitle: "关于 Winetime&hellip;",
+      footerBlockquote: "Winetime 柬埔寨是您值得信赖的优质葡萄酒和烈酒官方经销商,始终以卓越的服务,为您呈现丰富多样的产品。",
+      footerExplore: "探索", footerHome: "首页", footerAboutUs: "关于我们", footerEvent: "活动与婚礼", footerBar: "品酒吧",
+      footerCommunity: "社区", footerBlog: "博客", footerForum: "论坛", footerShopCollection: "选购精选葡萄酒", footerContact: "联系我们",
+      footerGetInTouch: "联系方式", footerBasedIn: "柬埔寨金边",
+      footerCookiePolicy: "Cookie 政策", footerBackToTop: "返回顶部", footerIntranet: "内部系统",
+      footerRights: "版权所有。",
+      cookieText: "我们使用一些必要的 Cookie 以保证网站正常运行,并使用可选的分析类 Cookie 来改进网站体验。详情请见我们的<a href=\"{cookieHref}\" style=\"color:#fff;text-decoration:underline;\">Cookie 政策</a>。",
+      cookieDecline: "拒绝", cookieAccept: "接受", cookieAria: "Cookie 提示",
+      installTitle: "安装 Winetime Asia", installBody: "将应用添加到主屏幕,浏览更快,并支持离线访问。",
+      installNotNow: "暂不安装", installGo: "安装",
+      finderPick: "选择一种风格以缩小商店搜索范围&mdash;或浏览全部商品。",
+      finderSearching: "正在商店中搜索<strong>{terms}</strong>",
+      backToTopAria: "返回顶部",
+      mailtoThanks: "感谢您!您的邮件应用即将打开,消息已预先填写并发送至 {email}。",
+      goToSlide: "转到第 {n} 张幻灯片"
+    }
+  };
+
+  function getLocale() {
+    var loc = document.body.getAttribute("data-locale");
+    return LOCALES.indexOf(loc) > -1 ? loc : "en";
+  }
+  function t(key) {
+    var locale = getLocale();
+    return (I18N[locale] && I18N[locale][key] != null) ? I18N[locale][key] : I18N.en[key];
+  }
+  function fmt(str, vars) {
+    return str.replace(/\{(\w+)\}/g, function (_, k) { return vars[k] != null ? vars[k] : ""; });
+  }
 
   function extAttrs() {
     return ' target="_blank" rel="noopener"';
   }
 
-  function renderDesktopNav(current) {
-    return NAV.map(function (item) {
+  /* ------------------------------------------------------------------ */
+  /* Navigation model (single source of truth for header + drawer)       */
+  /* ------------------------------------------------------------------ */
+  function getNav() {
+    return [
+      { key: "home", label: t("navHome"), href: "index.html" },
+      { key: "shop", label: t("navShop"), href: SHOP_URL, external: true, shop: true, ariaSuffix: t("shopAria") },
+      { key: "event", label: t("navEvent"), href: "event-wedding.html" },
+      { key: "bar", label: t("navBar"), href: "bar-a-vin.html" },
+      { key: "about", label: t("navAbout"), href: "about.html" },
+      { key: "communities", label: t("navCommunities"), children: [
+        { key: "blog", label: t("navBlog"), href: "blog.html" },
+        { key: "forum", label: t("navForum"), href: "forum.html" }
+      ] },
+      { key: "contact", label: t("navContact"), href: "contact.html" }
+    ];
+  }
+
+  function renderDesktopNav(current, nav) {
+    return nav.map(function (item) {
       if (item.children) {
         var open = item.children.some(function (c) { return c.key === current; });
         return (
@@ -75,14 +181,14 @@
       return (
         '<li><a class="' + (isActive ? "active" : "") + isShop + '" href="' + item.href + '"' + ext +
         (isActive ? ' aria-current="page"' : "") +
-        (item.external ? ' aria-label="' + item.label.replace(/&amp;/g, "&") + ' (opens the official Winetime shop in a new tab)"' : "") +
+        (item.external ? ' aria-label="' + item.label.replace(/&amp;/g, "&") + " (" + item.ariaSuffix + ')"' : "") +
         ">" + item.label + icon + "</a></li>"
       );
     }).join("");
   }
 
-  function renderMobileNav(current) {
-    return NAV.map(function (item) {
+  function renderMobileNav(current, nav) {
+    return nav.map(function (item) {
       if (item.children) {
         var open = item.children.some(function (c) { return c.key === current; });
         return (
@@ -102,83 +208,117 @@
     }).join("");
   }
 
-  function headerHTML(current) {
+  /* ------------------------------------------------------------------ */
+  /* Language switcher: builds correct relative link to the same page   */
+  /* in another locale, from any folder depth (root, /fr/, /zh/).       */
+  /* ------------------------------------------------------------------ */
+  function localeHref(targetLocale, currentLocale, filename) {
+    var rootPrefix = currentLocale === "en" ? "" : "../";
+    return rootPrefix + (targetLocale === "en" ? "" : targetLocale + "/") + filename;
+  }
+
+  function renderLangSwitcher(currentLocale, filename, variant) {
+    var items = LOCALES.map(function (loc) {
+      var isCurrent = loc === currentLocale;
+      var label = variant === "short" ? LOCALE_SHORT[loc] : LOCALE_NAME[loc];
+      if (isCurrent) {
+        return '<span class="lang-current" aria-current="true">' + label + "</span>";
+      }
+      return '<a href="' + localeHref(loc, currentLocale, filename) + '" hreflang="' + loc + '" lang="' + loc + '">' + label + "</a>";
+    }).join("");
+    return items;
+  }
+
+  function headerHTML(current, locale) {
+    var nav = getNav();
+    var filename = PAGE_FILE[current] || "index.html";
+    var depth = locale === "en" ? "" : "../";
     return (
       '<nav class="nav" aria-label="Main">' +
         '<div class="container">' +
           '<a class="brand" href="index.html" aria-label="Winetime Asia — Home">' +
-            '<img class="brand-logo" src="icons/logo-horizontal.png" alt="Winetime Asia" width="900" height="356">' +
+            '<img class="brand-logo" src="' + depth + 'icons/logo-horizontal.png" alt="Winetime Asia" width="900" height="356">' +
           "</a>" +
-          '<ul class="nav-links">' + renderDesktopNav(current) + "</ul>" +
+          '<ul class="nav-links">' + renderDesktopNav(current, nav) + "</ul>" +
           '<div class="nav-actions">' +
-            '<a class="icon-btn desktop-only" href="' + PHONE_HREF + '" aria-label="Call Winetime Asia">' + ICON.phone + "</a>" +
-            '<a class="icon-btn" href="' + SHOP_URL + '"' + extAttrs() + ' aria-label="Open the Winetime shop">' + ICON.cart + "</a>" +
-            '<button type="button" class="icon-btn hamburger" id="menu-open" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-drawer">' + ICON.menu + "</button>" +
+            '<div class="dropdown lang-dropdown">' +
+              '<button type="button" class="nav-link" aria-haspopup="true" aria-label="' + t("langLabel") + '">' + ICON.globe + LOCALE_SHORT[locale] + "</button>" +
+              '<div class="dropdown-menu lang-menu">' + renderLangSwitcher(locale, filename, "full") + "</div>" +
+            "</div>" +
+            '<a class="icon-btn desktop-only" href="' + PHONE_HREF + '" aria-label="' + t("callAria") + '">' + ICON.phone + "</a>" +
+            '<a class="icon-btn" href="' + SHOP_URL + '"' + extAttrs() + ' aria-label="' + t("shopIconAria") + '">' + ICON.cart + "</a>" +
+            '<a class="icon-btn desktop-only" href="' + INTRANET_URL + '"' + extAttrs() + ' aria-label="' + t("navIntranet") + " (" + t("intranetAria") + ')">' + ICON.intranet + "</a>" +
+            '<button type="button" class="icon-btn hamburger" id="menu-open" aria-label="' + t("openMenuAria") + '" aria-expanded="false" aria-controls="mobile-drawer">' + ICON.menu + "</button>" +
           "</div>" +
         "</div>" +
       "</nav>" +
       '<div class="mobile-drawer" id="mobile-drawer">' +
         '<div class="mobile-drawer__scrim" data-close-drawer></div>' +
-        '<div class="mobile-drawer__panel" role="dialog" aria-modal="true" aria-label="Menu">' +
+        '<div class="mobile-drawer__panel" role="dialog" aria-modal="true" aria-label="' + t("menuDialogAria") + '">' +
           '<div class="mobile-drawer__head">' +
-            '<a class="brand" href="index.html" aria-label="Winetime Asia — Home"><img class="brand-logo" src="icons/logo-horizontal.png" alt="Winetime Asia" width="900" height="356"></a>' +
-            '<button type="button" class="icon-btn" id="menu-close" aria-label="Close menu">' + ICON.close + "</button>" +
+            '<a class="brand" href="index.html" aria-label="Winetime Asia — Home"><img class="brand-logo" src="' + depth + 'icons/logo-horizontal.png" alt="Winetime Asia" width="900" height="356"></a>' +
+            '<button type="button" class="icon-btn" id="menu-close" aria-label="' + t("closeMenuAria") + '">' + ICON.close + "</button>" +
           "</div>" +
-          '<nav><ul>' + renderMobileNav(current) + "</ul></nav>" +
-          '<a class="btn btn-primary" href="' + SHOP_URL + '"' + extAttrs() + ">Shop the collection " + ICON.external + "</a>" +
+          '<nav><ul>' + renderMobileNav(current, nav) + "</ul></nav>" +
+          '<div class="mobile-lang-switcher">' + renderLangSwitcher(locale, filename, "short") + "</div>" +
+          '<a class="btn btn-primary" href="' + SHOP_URL + '"' + extAttrs() + ">" + t("shopCollectionCta") + " " + ICON.external + "</a>" +
           '<a class="btn btn-outline" href="' + PHONE_HREF + '">' + ICON.phone + " " + PHONE + "</a>" +
+          '<a class="btn btn-outline" href="' + INTRANET_URL + '"' + extAttrs() + ">" + ICON.intranet + " " + t("navIntranet") + "</a>" +
         "</div>" +
       "</div>"
     );
   }
 
-  function footerHTML() {
+  function footerHTML(current, locale) {
     var year = new Date().getFullYear();
+    var filename = PAGE_FILE[current] || "index.html";
     return (
       '<div class="container footer-top">' +
         '<div class="footer-grid">' +
           '<div class="footer-brand">' +
-            "<h2>We are Winetime&hellip;</h2>" +
-            "<blockquote>Winetime Cambodia is your official distributor of quality wines and spirits, proudly offering an unparalleled range of products paired with the best service, every time.</blockquote>" +
+            "<h2>" + t("footerBrandTitle") + "</h2>" +
+            "<blockquote>" + t("footerBlockquote") + "</blockquote>" +
             '<div class="footer-social">' +
               '<a href="https://www.facebook.com/" aria-label="Winetime on Facebook"' + extAttrs() + ">" + ICON.fb + "</a>" +
               '<a href="https://www.instagram.com/" aria-label="Winetime on Instagram"' + extAttrs() + ">" + ICON.ig + "</a>" +
               '<a href="https://www.youtube.com/" aria-label="Winetime on YouTube"' + extAttrs() + ">" + ICON.yt + "</a>" +
             "</div>" +
+            '<div class="footer-lang">' + renderLangSwitcher(locale, filename, "short") + "</div>" +
           "</div>" +
           '<div class="footer-col">' +
-            "<h4>Explore</h4>" +
+            "<h4>" + t("footerExplore") + "</h4>" +
             "<ul>" +
-              '<li><a href="index.html">Home</a></li>' +
-              '<li><a href="about.html">About us</a></li>' +
-              '<li><a href="event-wedding.html">Event &amp; Wedding</a></li>' +
-              '<li><a href="bar-a-vin.html">Bar &agrave; Vin</a></li>' +
+              '<li><a href="index.html">' + t("footerHome") + "</a></li>" +
+              '<li><a href="about.html">' + t("footerAboutUs") + "</a></li>" +
+              '<li><a href="event-wedding.html">' + t("footerEvent") + "</a></li>" +
+              '<li><a href="bar-a-vin.html">' + t("footerBar") + "</a></li>" +
             "</ul>" +
           "</div>" +
           '<div class="footer-col">' +
-            "<h4>Community</h4>" +
+            "<h4>" + t("footerCommunity") + "</h4>" +
             "<ul>" +
-              '<li><a href="blog.html">Blog</a></li>' +
-              '<li><a href="forum.html">Forum</a></li>' +
-              '<li><a href="' + SHOP_URL + '"' + extAttrs() + ">Shop the collection " + ICON.external + "</a></li>" +
-              '<li><a href="contact.html">Contact us</a></li>' +
+              '<li><a href="blog.html">' + t("footerBlog") + "</a></li>" +
+              '<li><a href="forum.html">' + t("footerForum") + "</a></li>" +
+              '<li><a href="' + SHOP_URL + '"' + extAttrs() + ">" + t("footerShopCollection") + " " + ICON.external + "</a></li>" +
+              '<li><a href="contact.html">' + t("footerContact") + "</a></li>" +
             "</ul>" +
           "</div>" +
           '<div class="footer-col">' +
-            "<h4>Get in touch</h4>" +
+            "<h4>" + t("footerGetInTouch") + "</h4>" +
             '<ul class="footer-contact">' +
               '<li>' + ICON.phone + '<a href="' + PHONE_HREF + '">' + PHONE + "</a></li>" +
               '<li>' + ICON.mail + '<a href="mailto:' + EMAIL + '">' + EMAIL + "</a></li>" +
-              '<li>' + ICON.pin + "<span>Phnom Penh, Cambodia</span></li>" +
+              '<li>' + ICON.pin + "<span>" + t("footerBasedIn") + "</span></li>" +
             "</ul>" +
           "</div>" +
         "</div>" +
       "</div>" +
       '<div class="container footer-bottom">' +
-        "<span>&copy; " + year + " Winetime Asia &mdash; Sarapich PIN. All rights reserved.</span>" +
-        '<div style="display:flex;gap:18px;">' +
-          '<a href="cookie-policy.html">Cookie Policy</a>' +
-          '<a href="#top">Back to top</a>' +
+        "<span>&copy; " + year + " Winetime Asia &mdash; Sarapich PIN. " + t("footerRights") + "</span>" +
+        '<div style="display:flex;gap:18px;flex-wrap:wrap;">' +
+          '<a href="cookie-policy.html">' + t("footerCookiePolicy") + "</a>" +
+          '<a href="' + INTRANET_URL + '"' + extAttrs() + ">" + t("footerIntranet") + " " + ICON.external + "</a>" +
+          '<a href="#top">' + t("footerBackToTop") + "</a>" +
         "</div>" +
       "</div>"
     );
@@ -189,10 +329,11 @@
   /* ------------------------------------------------------------------ */
   function mountChrome() {
     var current = document.body.getAttribute("data-page") || "";
+    var locale = getLocale();
     var headerEl = document.getElementById("site-header");
     var footerEl = document.getElementById("site-footer");
-    if (headerEl) headerEl.innerHTML = headerHTML(current);
-    if (footerEl) footerEl.innerHTML = footerHTML();
+    if (headerEl) headerEl.innerHTML = headerHTML(current, locale);
+    if (footerEl) footerEl.innerHTML = footerHTML(current, locale);
   }
 
   /* ------------------------------------------------------------------ */
@@ -245,7 +386,7 @@
 
     if (dotsWrap) {
       dotsWrap.innerHTML = slides.map(function (_, i) {
-        return '<button type="button" aria-label="Go to slide ' + (i + 1) + '"' + (i === 0 ? ' class="is-active"' : "") + "></button>";
+        return '<button type="button" aria-label="' + fmt(t("goToSlide"), { n: i + 1 }) + '"' + (i === 0 ? ' class="is-active"' : "") + "></button>";
       }).join("");
     }
     var dots = dotsWrap ? Array.prototype.slice.call(dotsWrap.children) : [];
@@ -321,8 +462,8 @@
       var terms = Object.keys(selections).map(function (k) { return selections[k]; }).filter(Boolean);
       if (resultEl) {
         resultEl.innerHTML = terms.length
-          ? "Searching for <strong>" + terms.join(", ") + "</strong> in the shop"
-          : "Pick a style to narrow down the shop search &mdash; or browse everything.";
+          ? fmt(t("finderSearching"), { terms: terms.join(", ") })
+          : t("finderPick");
       }
     }
     chips.forEach(function (chip) {
@@ -379,7 +520,7 @@
     var btn = document.createElement("button");
     btn.className = "back-to-top";
     btn.type = "button";
-    btn.setAttribute("aria-label", "Back to top");
+    btn.setAttribute("aria-label", t("backToTopAria"));
     btn.innerHTML = ICON.up;
     document.body.appendChild(btn);
     window.addEventListener("scroll", function () {
@@ -399,12 +540,12 @@
     el.className = "sheet-banner";
     el.id = "cookie-banner";
     el.setAttribute("role", "dialog");
-    el.setAttribute("aria-label", "Cookie notice");
+    el.setAttribute("aria-label", t("cookieAria"));
     el.innerHTML =
-      "<p>We use a few essential cookies to make this site work, plus optional analytics to improve it. See our <a href=\"cookie-policy.html\" style=\"color:#fff;text-decoration:underline;\">Cookie Policy</a>.</p>" +
+      "<p>" + fmt(t("cookieText"), { cookieHref: "cookie-policy.html" }) + "</p>" +
       '<div class="actions">' +
-        '<button type="button" class="btn btn-outline btn-sm" data-cookie="decline">Decline</button>' +
-        '<button type="button" class="btn btn-primary btn-sm" data-cookie="accept">Accept</button>' +
+        '<button type="button" class="btn btn-outline btn-sm" data-cookie="decline">' + t("cookieDecline") + "</button>" +
+        '<button type="button" class="btn btn-primary btn-sm" data-cookie="accept">' + t("cookieAccept") + "</button>" +
       "</div>";
     document.body.appendChild(el);
     requestAnimationFrame(function () { el.classList.add("show"); });
@@ -437,10 +578,10 @@
       el.className = "sheet-banner";
       el.id = "install-banner";
       el.innerHTML =
-        "<p><strong>Install Winetime Asia</strong><br>Add the app to your home screen for faster, offline-friendly browsing.</p>" +
+        "<p><strong>" + t("installTitle") + "</strong><br>" + t("installBody") + "</p>" +
         '<div class="actions">' +
-          '<button type="button" class="btn btn-outline btn-sm" data-install="dismiss">Not now</button>' +
-          '<button type="button" class="btn btn-primary btn-sm" data-install="go">Install</button>' +
+          '<button type="button" class="btn btn-outline btn-sm" data-install="dismiss">' + t("installNotNow") + "</button>" +
+          '<button type="button" class="btn btn-primary btn-sm" data-install="go">' + t("installGo") + "</button>" +
         "</div>";
       document.body.appendChild(el);
       requestAnimationFrame(function () { el.classList.add("show"); });
@@ -468,7 +609,8 @@
 
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", function () {
-        navigator.serviceWorker.register("sw.js").catch(function (err) {
+        var depth = getLocale() === "en" ? "" : "../";
+        navigator.serviceWorker.register(depth + "sw.js", { scope: depth || "./" }).catch(function (err) {
           console.warn("Service worker registration failed:", err);
         });
       });
@@ -495,7 +637,7 @@
         var body = encodeURIComponent(lines.join("\n"));
         var href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + body;
         if (feedback) {
-          feedback.textContent = "Thanks! Your email app is opening with your message pre-filled to " + EMAIL + ".";
+          feedback.textContent = fmt(t("mailtoThanks"), { email: EMAIL });
           feedback.className = "form-feedback show ok";
         }
         window.location.href = href;
