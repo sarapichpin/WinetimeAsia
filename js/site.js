@@ -7,7 +7,7 @@
   "use strict";
 
   var SHOP_URL = "https://winetime-asia.odoo.com/shop";
-  var INTRANET_URL = "https://www.winetime-asia.odoo.com";
+  var INTRANET_URL = "https://winetime-asia.odoo.com/";
   var PHONE = "+855 85 31 32 03";
   var PHONE_HREF = "tel:+855853132 03".replace(/\s/g, "");
   var EMAIL = "sale@winetime.asia";
