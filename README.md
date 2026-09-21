@@ -15,9 +15,14 @@ Every **Shop** link on this site (nav, footer, product cards, CTAs) points out t
 - `contact.html` — Contact form, info, map.
 - `blog.html`, `forum.html` — Community landing pages (content pipeline coming soon).
 - `cookie-policy.html`, `offline.html`, `404.html` — Support pages.
-- `css/style.css` — Design system (brand tokens sampled from the live Odoo site: `#c42859` pink, `#2d3338` navy, `#0e0e12` ink).
+- `css/style.css` — Design system (brand tokens sampled from the official logo artwork: `#e63a1b` red, `#333333` charcoal).
 - `js/site.js` — Shared header/footer injection, navigation, carousels, forms, cookie banner, PWA install prompt, service worker registration.
 - `manifest.webmanifest`, `sw.js`, `icons/` — PWA: installable app, offline-friendly app-shell caching.
+- `images/` — Licensed hero/banner photography (see **Images** below).
+
+## Images
+
+`images/home-hero.jpg`, `about-hero.jpg`, `event-hero.jpg`, `bar-hero.jpg` and `collection-banner.jpg` are royalty-free stock photos licensed through Adobe Stock's free tier — cleared for this kind of commercial use, no attribution required. Swap any of them for real venue/product photography whenever it's available; each is referenced by a single `background-image` inline style at the top of its page, so replacing the file (same name) or updating the path is a one-line change.
 
 ## Forms
 
@@ -45,7 +50,7 @@ Before going live, update:
 
 ## Next steps worth considering
 
-- Real product photography instead of the illustrative bottle icons.
+- Real product photography instead of the illustrative bottle icons on the homepage.
 - FR/KM translations (the original site supported English, French and Khmer).
 - A real form backend for contact/newsletter/event submissions.
-- Swap the placeholder team initials in `about.html` for real photos/bios.
+- Swap the placeholder team initials in `about.html`, and the stock hero photos, for real photos once available.

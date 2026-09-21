@@ -247,6 +247,10 @@ p { margin: 0 0 1em; }
 .hero-glass .stat strong { font-family: var(--font-display); font-size: 2rem; color: var(--pink-light); }
 .hero-glass .stat span { color: var(--text-inverse-muted); font-size: 0.92rem; }
 .hero-glass hr { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 4px 0; }
+@media (max-width: 860px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .hero .container { padding-block: 56px; }
+}
 
 .page-hero {
   background: linear-gradient(160deg, var(--navy) 0%, var(--ink) 100%); color: var(--text-inverse);
