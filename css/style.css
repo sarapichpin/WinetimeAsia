@@ -142,7 +142,7 @@ p { margin: 0 0 1em; }
 .nav-links { display: flex; align-items: center; gap: 4px; margin-right: auto; }
 .nav-links > li { position: relative; }
 .nav-links a, .nav-links button.nav-link {
-  display: flex; align-items: center; gap: 6px; padding: 10px 14px; border-radius: var(--radius-pill);
+  display: flex; align-items: center; justify-content: center; text-align: center; gap: 6px; padding: 10px 14px; border-radius: var(--radius-pill);
   font-size: 0.93rem; font-weight: 500; color: var(--text-inverse-muted);
   background: transparent; border: none; transition: background 0.2s, color 0.2s;
 }
