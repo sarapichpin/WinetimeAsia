@@ -106,9 +106,8 @@
     return (
       '<nav class="nav" aria-label="Main">' +
         '<div class="container">' +
-          '<a class="brand" href="index.html">' +
-            '<span class="brand-mark" aria-hidden="true">W</span>' +
-            "wine<small>time</small>" +
+          '<a class="brand" href="index.html" aria-label="Winetime Asia — Home">' +
+            '<img class="brand-logo" src="icons/logo-horizontal.png" alt="Winetime Asia" width="900" height="356">' +
           "</a>" +
           '<ul class="nav-links">' + renderDesktopNav(current) + "</ul>" +
           '<div class="nav-actions">' +
@@ -122,7 +121,7 @@
         '<div class="mobile-drawer__scrim" data-close-drawer></div>' +
         '<div class="mobile-drawer__panel" role="dialog" aria-modal="true" aria-label="Menu">' +
           '<div class="mobile-drawer__head">' +
-            '<a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">W</span>wine<small>time</small></a>' +
+            '<a class="brand" href="index.html" aria-label="Winetime Asia — Home"><img class="brand-logo" src="icons/logo-horizontal.png" alt="Winetime Asia" width="900" height="356"></a>' +
             '<button type="button" class="icon-btn" id="menu-close" aria-label="Close menu">' + ICON.close + "</button>" +
           "</div>" +
           '<nav><ul>' + renderMobileNav(current) + "</ul></nav>" +

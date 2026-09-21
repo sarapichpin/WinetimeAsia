@@ -3,7 +3,7 @@
  * App-shell caching for offline-friendly browsing.
  * Bump CACHE_VERSION whenever precached files change.
  */
-const CACHE_VERSION = "wt-v1";
+const CACHE_VERSION = "wt-v2";
 const STATIC_CACHE = CACHE_VERSION + "-static";
 const PAGES_CACHE = CACHE_VERSION + "-pages";
 
@@ -24,7 +24,10 @@ const PRECACHE_URLS = [
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
-  "./icons/icon-maskable-512.png"
+  "./icons/icon-maskable-512.png",
+  "./icons/logo-horizontal.png",
+  "./icons/favicon-48.png",
+  "./icons/apple-touch-icon.png"
 ];
 
 self.addEventListener("install", (event) => {
