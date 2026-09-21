@@ -567,8 +567,16 @@
   /* ------------------------------------------------------------------ */
   /* Cookie consent banner                                               */
   /* ------------------------------------------------------------------ */
+  function grantAnalyticsConsent() {
+    if (typeof window.gtag === "function") {
+      window.gtag("consent", "update", { analytics_storage: "granted" });
+    }
+  }
+
   function initCookieBanner() {
-    if (localStorage.getItem("wt-cookie-consent")) return;
+    var stored = localStorage.getItem("wt-cookie-consent");
+    if (stored === "accept") grantAnalyticsConsent();
+    if (stored) return;
     var el = document.createElement("div");
     el.className = "sheet-banner";
     el.id = "cookie-banner";
@@ -586,6 +594,7 @@
       var choice = e.target.getAttribute("data-cookie");
       if (!choice) return;
       localStorage.setItem("wt-cookie-consent", choice);
+      if (choice === "accept") grantAnalyticsConsent();
       el.classList.remove("show");
       setTimeout(function () { el.remove(); }, 400);
     });

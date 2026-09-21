@@ -33,6 +33,10 @@ Because `fr/`, `zh/` and `km/` are one folder deep, every asset reference in tho
 
 `images/home-hero.jpg`, `about-hero.jpg`, `event-hero.jpg`, `bar-hero.jpg` and `collection-banner.jpg` are royalty-free stock photos licensed through Adobe Stock's free tier — cleared for this kind of commercial use, no attribution required. Swap any of them for real venue/product photography whenever it's available; each is referenced by a single `background-image` inline style at the top of its page, so replacing the file (same name) or updating the path is a one-line change.
 
+## Analytics
+
+Google Analytics 4 (measurement ID `G-JYPTT31KGH`) is loaded on every page via `gtag.js`, but it starts with `analytics_storage` denied (Google's Consent Mode v2). It only switches to granted once a visitor clicks Accept on the cookie banner — `grantAnalyticsConsent()` in `js/site.js` handles both that click and returning visitors who already accepted. Declining, or never answering the banner, keeps tracking off. The measurement ID is duplicated in every page's `<head>` (same pattern as the Google Fonts links) since there's no build step to share it from one place.
+
 ## Forms
 
 There is no backend. Contact / newsletter / event forms build a pre-filled `mailto:` link to `sale@winetime.asia` on submit. To collect submissions properly (a real inbox/CRM/analytics), swap `initForms()` in `js/site.js` for a call to a form service (e.g. Formspree, Brevo, a small serverless function) — the markup already has `name` attributes ready to map.
