@@ -1,7 +1,7 @@
 /*!
  * Winetime Asia — shared site behavior
  * Injects header/footer, wires navigation, carousels, forms, PWA install,
- * i18n chrome (EN/FR/ZH) and service-worker registration. No build step.
+ * i18n chrome (EN/FR/ZH/KM) and service-worker registration. No build step.
  */
 (function () {
   "use strict";
@@ -11,9 +11,9 @@
   var PHONE = "+855 85 31 32 03";
   var PHONE_HREF = "tel:+855853132 03".replace(/\s/g, "");
   var EMAIL = "sale@winetime.asia";
-  var LOCALES = ["en", "fr", "zh"];
-  var LOCALE_SHORT = { en: "EN", fr: "FR", zh: "中文" };
-  var LOCALE_NAME = { en: "English", fr: "Français", zh: "中文" };
+  var LOCALES = ["en", "fr", "zh", "km"];
+  var LOCALE_SHORT = { en: "EN", fr: "FR", zh: "中文", km: "ខ្មែរ" };
+  var LOCALE_NAME = { en: "English", fr: "Français", zh: "中文", km: "ខ្មែរ" };
   var PAGE_FILE = {
     home: "index.html", about: "about.html", event: "event-wedding.html",
     bar: "bar-a-vin.html", contact: "contact.html", blog: "blog.html",
@@ -120,6 +120,31 @@
       backToTopAria: "返回顶部",
       mailtoThanks: "感谢您!您的邮件应用即将打开,消息已预先填写并发送至 {email}。",
       goToSlide: "转到第 {n} 张幻灯片"
+    },
+    km: {
+      navHome: "ទំព័រដើម", navShop: "ហាង", navEvent: "កម្មវិធី &amp; អាពាហ៍ពិពាហ៍", navBar: "បារស្រាទំពាំងបាយជូរ", navAbout: "អំពីយើង",
+      navCommunities: "សហគមន៍", navBlog: "ប្លុក", navForum: "វេទិកា", navContact: "ទាក់ទងយើង", navIntranet: "អ៊ីនត្រាណែត",
+      shopAria: "បើកហាងផ្លូវការ Winetime នៅផ្ទាំងថ្មី",
+      intranetAria: "បើកអ៊ីនត្រាណែត Winetime នៅផ្ទាំងថ្មី",
+      callAria: "ទូរស័ព្ទទៅ Winetime Asia", shopIconAria: "បើកហាង Winetime",
+      openMenuAria: "បើកម៉ឺនុយ", closeMenuAria: "បិទម៉ឺនុយ", menuDialogAria: "ម៉ឺនុយ",
+      shopCollectionCta: "ជ្រើសទិញនៅហាង", langLabel: "ភាសា",
+      footerBrandTitle: "យើងគឺ Winetime&hellip;",
+      footerBlockquote: "Winetime កម្ពុជាគឺជាអ្នកចែកចាយផ្លូវការនៃស្រាទំពាំងបាយជូរ និងគ្រឿងស្រវឹងគុណភាពខ្ពស់ ដោយមានមោទនភាពក្នុងការផ្តល់ជូននូវផលិតផលចម្រុះបំផុត ភ្ជាប់ជាមួយសេវាកម្មល្អបំផុតគ្រប់ពេលវេលា។",
+      footerExplore: "ស្វែងយល់", footerHome: "ទំព័រដើម", footerAboutUs: "អំពីយើង", footerEvent: "កម្មវិធី &amp; អាពាហ៍ពិពាហ៍", footerBar: "បារស្រាទំពាំងបាយជូរ",
+      footerCommunity: "សហគមន៍", footerBlog: "ប្លុក", footerForum: "វេទិកា", footerShopCollection: "ជ្រើសទិញនៅហាង", footerContact: "ទាក់ទងយើង",
+      footerGetInTouch: "ទំនាក់ទំនងមកយើង", footerBasedIn: "ភ្នំពេញ កម្ពុជា",
+      footerCookiePolicy: "គោលការណ៍ខូគី", footerBackToTop: "ត្រឡប់ទៅលើ", footerIntranet: "អ៊ីនត្រាណែត",
+      footerRights: "រក្សាសិទ្ធិគ្រប់យ៉ាង។",
+      cookieText: "យើងប្រើខូគីសំខាន់ៗមួយចំនួនដើម្បីឱ្យគេហទំព័រនេះដំណើរការបាន ព្រមទាំងខូគីវិភាគជាជម្រើសបន្ថែមដើម្បីកែលម្អគេហទំព័រ។ សូមមើល<a href=\"{cookieHref}\" style=\"color:#fff;text-decoration:underline;\">គោលការណ៍ខូគី</a>របស់យើង។",
+      cookieDecline: "បដិសេធ", cookieAccept: "យល់ព្រម", cookieAria: "សេចក្តីជូនដំណឹងអំពីខូគី",
+      installTitle: "ដំឡើង Winetime Asia", installBody: "បន្ថែមកម្មវិធីទៅកាន់អេក្រង់ដើមរបស់អ្នក ដើម្បីរុករកបានលឿន និងប្រើប្រាស់បានទោះគ្មានអ៊ីនធឺណិត។",
+      installNotNow: "មិនទាន់ទេ", installGo: "ដំឡើង",
+      finderPick: "ជ្រើសរើសម៉ូដមួយ ដើម្បីកំណត់លទ្ធផលស្វែងរកក្នុងហាង&mdash;ឬរុករកមើលផលិតផលទាំងអស់។",
+      finderSearching: "កំពុងស្វែងរក <strong>{terms}</strong> នៅក្នុងហាង",
+      backToTopAria: "ត្រឡប់ទៅលើ",
+      mailtoThanks: "អរគុណ! កម្មវិធីអ៊ីមែលរបស់អ្នកកំពុងបើក ដោយសារបានបំពេញសារជាមុនផ្ញើទៅកាន់ {email}។",
+      goToSlide: "ទៅកាន់ស្លាយទី {n}"
     }
   };
 

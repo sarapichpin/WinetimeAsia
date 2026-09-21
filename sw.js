@@ -3,7 +3,7 @@
  * App-shell caching for offline-friendly browsing.
  * Bump CACHE_VERSION whenever precached files change.
  */
-const CACHE_VERSION = "wt-v4";
+const CACHE_VERSION = "wt-v5";
 const STATIC_CACHE = CACHE_VERSION + "-static";
 const PAGES_CACHE = CACHE_VERSION + "-pages";
 
@@ -43,7 +43,15 @@ const PRECACHE_URLS = [
   "./zh/contact.html",
   "./zh/blog.html",
   "./zh/forum.html",
-  "./zh/cookie-policy.html"
+  "./zh/cookie-policy.html",
+  "./km/index.html",
+  "./km/about.html",
+  "./km/event-wedding.html",
+  "./km/bar-a-vin.html",
+  "./km/contact.html",
+  "./km/blog.html",
+  "./km/forum.html",
+  "./km/cookie-policy.html"
 ];
 
 self.addEventListener("install", (event) => {

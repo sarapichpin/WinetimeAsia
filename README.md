@@ -19,15 +19,15 @@ Every **Shop** link on this site (nav, footer, product cards, CTAs) points out t
 - `js/site.js` — Shared header/footer injection, navigation, carousels, forms, cookie banner, PWA install prompt, service worker registration.
 - `manifest.webmanifest`, `sw.js`, `icons/` — PWA: installable app, offline-friendly app-shell caching.
 - `images/` — Licensed hero/banner photography (see **Images** below).
-- `fr/`, `zh/` — Full French and Simplified Chinese translations (see **Languages** below).
+- `fr/`, `zh/`, `km/` — Full French, Simplified Chinese and Khmer translations (see **Languages** below).
 
 ## Languages
 
-The site ships in English (root), French (`/fr/`) and Simplified Chinese (`/zh/`) — pick one from the language switcher in the header (a globe menu on desktop, a row of buttons in the mobile drawer) or the footer. English is the default/canonical language; every page has matching translated copies at the same filename under `fr/` and `zh/` (e.g. `about.html` ↔ `fr/about.html` ↔ `zh/about.html`), plus `hreflang` alternate tags in each page's `<head>` and in `sitemap.xml` for search engines.
+The site ships in English (root), French (`/fr/`), Simplified Chinese (`/zh/`) and Khmer (`/km/`) — pick one from the language switcher in the header (a globe menu on desktop, a row of buttons in the mobile drawer) or the footer. English is the default/canonical language; every page has matching translated copies at the same filename under `fr/`, `zh/` and `km/` (e.g. `about.html` ↔ `fr/about.html` ↔ `zh/about.html` ↔ `km/about.html`), plus `hreflang` alternate tags in each page's `<head>` and in `sitemap.xml` for search engines.
 
-There's no i18n framework: each locale is a fully static, hand-translated HTML file (simplest option with no build step). Chrome text — nav labels, footer, cookie/install banners, form feedback — lives in one place, the `I18N` dictionary near the top of `js/site.js`; body copy is translated directly in each page. To add a fourth language, add a locale to `LOCALES`/`I18N` in `site.js`, then copy the `fr/` (or `zh/`) folder as a template and translate its 8 pages. `404.html` and `offline.html` are intentionally English-only fallbacks (edge cases, low value to translate); the language switcher on those pages links to each locale's homepage instead of a translated 404.
+There's no i18n framework: each locale is a fully static, hand-translated HTML file (simplest option with no build step). Chrome text — nav labels, footer, cookie/install banners, form feedback — lives in one place, the `I18N` dictionary near the top of `js/site.js`; body copy is translated directly in each page. To add another language, add a locale to `LOCALES`/`I18N` in `site.js`, then copy the `fr/` (or `km/`) folder as a template and translate its 8 pages. `404.html` and `offline.html` are intentionally English-only fallbacks (edge cases, low value to translate); the language switcher on those pages links to each locale's homepage instead of a translated 404.
 
-Because `fr/` and `zh/` are one folder deep, every asset reference in those pages (`css/`, `js/`, `icons/`, `images/`, `manifest.webmanifest`) is prefixed with `../` — keep that in mind when copy-pasting sections between locales.
+Because `fr/`, `zh/` and `km/` are one folder deep, every asset reference in those pages (`css/`, `js/`, `icons/`, `images/`, `manifest.webmanifest`) is prefixed with `../` — keep that in mind when copy-pasting sections between locales. Chinese glyphs aren't in the Fraunces/Inter web fonts, but every OS ships a CJK-capable system font so the browser falls back automatically. Khmer coverage is far less reliable across devices/OSes, so the `km/` pages additionally load the Noto Sans Khmer web font and `css/style.css` lists it in `--font-display`/`--font-body` as an explicit fallback (harmless on other locales, since it's simply never requested there).
 
 ## Images
 
