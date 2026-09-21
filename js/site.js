@@ -65,6 +65,8 @@
       cookieDecline: "Decline", cookieAccept: "Accept", cookieAria: "Cookie notice",
       installTitle: "Install Winetime Asia", installBody: "Add the app to your home screen for faster, offline-friendly browsing.",
       installNotNow: "Not now", installGo: "Install",
+      installIOSBody: "Tap the Share icon, then \"Add to Home Screen\", for faster, offline-friendly browsing.",
+      installGotIt: "Got it",
       finderPick: "Pick a style to narrow down the shop search &mdash; or browse everything.",
       finderSearching: "Searching for <strong>{terms}</strong> in the shop",
       backToTopAria: "Back to top",
@@ -90,6 +92,8 @@
       cookieDecline: "Refuser", cookieAccept: "Accepter", cookieAria: "Avis relatif aux cookies",
       installTitle: "Installer Winetime Asia", installBody: "Ajoutez l'application à votre écran d'accueil pour une navigation plus rapide, même hors ligne.",
       installNotNow: "Plus tard", installGo: "Installer",
+      installIOSBody: "Appuyez sur l'icône Partager, puis « Sur l'écran d'accueil », pour une navigation plus rapide, même hors ligne.",
+      installGotIt: "Compris",
       finderPick: "Choisissez un style pour affiner la recherche dans la boutique &mdash; ou parcourez tout le catalogue.",
       finderSearching: "Recherche de <strong>{terms}</strong> dans la boutique",
       backToTopAria: "Retour en haut",
@@ -115,6 +119,8 @@
       cookieDecline: "拒绝", cookieAccept: "接受", cookieAria: "Cookie 提示",
       installTitle: "安装 Winetime Asia", installBody: "将应用添加到主屏幕,浏览更快,并支持离线访问。",
       installNotNow: "暂不安装", installGo: "安装",
+      installIOSBody: "点击“分享”图标,然后选择“添加到主屏幕”,浏览更快,并支持离线访问。",
+      installGotIt: "知道了",
       finderPick: "选择一种风格以缩小商店搜索范围&mdash;或浏览全部商品。",
       finderSearching: "正在商店中搜索<strong>{terms}</strong>",
       backToTopAria: "返回顶部",
@@ -140,6 +146,8 @@
       cookieDecline: "បដិសេធ", cookieAccept: "យល់ព្រម", cookieAria: "សេចក្តីជូនដំណឹងអំពីខូគី",
       installTitle: "ដំឡើង Winetime Asia", installBody: "បន្ថែមកម្មវិធីទៅកាន់អេក្រង់ដើមរបស់អ្នក ដើម្បីរុករកបានលឿន និងប្រើប្រាស់បានទោះគ្មានអ៊ីនធឺណិត។",
       installNotNow: "មិនទាន់ទេ", installGo: "ដំឡើង",
+      installIOSBody: "ចុចលើរូបតំណាង Share រួចជ្រើសរើស \"បន្ថែមទៅអេក្រង់ដើម\" ដើម្បីរុករកបានលឿន និងប្រើប្រាស់បានទោះគ្មានអ៊ីនធឺណិត។",
+      installGotIt: "យល់ហើយ",
       finderPick: "ជ្រើសរើសម៉ូដមួយ ដើម្បីកំណត់លទ្ធផលស្វែងរកក្នុងហាង&mdash;ឬរុករកមើលផលិតផលទាំងអស់។",
       finderSearching: "កំពុងស្វែងរក <strong>{terms}</strong> នៅក្នុងហាង",
       backToTopAria: "ត្រឡប់ទៅលើ",
@@ -589,6 +597,9 @@
   function initPWA() {
     var deferredPrompt = null;
     var isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone;
+    var ua = window.navigator.userAgent;
+    var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+    var isIOSSafari = isIOS && /Safari/.test(ua) && !/CriOS|FxiOS|EdgiOS|OPiOS/.test(ua);
 
     window.addEventListener("beforeinstallprompt", function (e) {
       e.preventDefault();
@@ -596,6 +607,12 @@
       if (isStandalone || localStorage.getItem("wt-install-dismissed")) return;
       showInstallBanner();
     });
+
+    // Safari on iOS never fires beforeinstallprompt, so there is no native
+    // install popup to trigger there — show our own instructions instead.
+    if (isIOSSafari && !isStandalone && !localStorage.getItem("wt-install-dismissed")) {
+      setTimeout(showIOSInstallBanner, 2000);
+    }
 
     function showInstallBanner() {
       if (document.getElementById("install-banner")) return;
@@ -619,6 +636,25 @@
             dismissInstallBanner();
           });
         } else if (action === "dismiss") {
+          localStorage.setItem("wt-install-dismissed", "1");
+          dismissInstallBanner();
+        }
+      });
+    }
+    function showIOSInstallBanner() {
+      if (document.getElementById("install-banner")) return;
+      var el = document.createElement("div");
+      el.className = "sheet-banner";
+      el.id = "install-banner";
+      el.innerHTML =
+        "<p><strong>" + t("installTitle") + "</strong><br>" + t("installIOSBody") + "</p>" +
+        '<div class="actions">' +
+          '<button type="button" class="btn btn-primary btn-sm" data-install="dismiss">' + t("installGotIt") + "</button>" +
+        "</div>";
+      document.body.appendChild(el);
+      requestAnimationFrame(function () { el.classList.add("show"); });
+      el.addEventListener("click", function (e) {
+        if (e.target.getAttribute("data-install") === "dismiss") {
           localStorage.setItem("wt-install-dismissed", "1");
           dismissInstallBanner();
         }
