@@ -1,0 +1,93 @@
+/*!
+ * Winetime Asia — Service Worker
+ * App-shell caching for offline-friendly browsing.
+ * Bump CACHE_VERSION whenever precached files change.
+ */
+const CACHE_VERSION = "wt-v1";
+const STATIC_CACHE = CACHE_VERSION + "-static";
+const PAGES_CACHE = CACHE_VERSION + "-pages";
+
+const PRECACHE_URLS = [
+  "./",
+  "./index.html",
+  "./about.html",
+  "./event-wedding.html",
+  "./bar-a-vin.html",
+  "./contact.html",
+  "./blog.html",
+  "./forum.html",
+  "./cookie-policy.html",
+  "./offline.html",
+  "./404.html",
+  "./css/style.css",
+  "./js/site.js",
+  "./manifest.webmanifest",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png",
+  "./icons/icon-maskable-512.png"
+];
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(STATIC_CACHE)
+      .then((cache) => cache.addAll(PRECACHE_URLS))
+      .then(() => self.skipWaiting())
+  );
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys
+          .filter((key) => key.startsWith("wt-") && key !== STATIC_CACHE && key !== PAGES_CACHE)
+          .map((key) => caches.delete(key))
+      )
+    ).then(() => self.clients.claim())
+  );
+});
+
+// Never intercept the external shop, or non-GET requests.
+function shouldHandle(request) {
+  if (request.method !== "GET") return false;
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) return false;
+  return true;
+}
+
+self.addEventListener("fetch", (event) => {
+  const { request } = event;
+  if (!shouldHandle(request)) return;
+
+  // HTML navigations: network-first, cache fallback, offline page as last resort.
+  if (request.mode === "navigate" || (request.headers.get("accept") || "").includes("text/html")) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(PAGES_CACHE).then((cache) => cache.put(request, copy));
+          return response;
+        })
+        .catch(() =>
+          caches.match(request).then((cached) => cached || caches.match("./offline.html"))
+        )
+    );
+    return;
+  }
+
+  // Static assets: cache-first, update in background.
+  event.respondWith(
+    caches.match(request).then((cached) => {
+      const network = fetch(request)
+        .then((response) => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(STATIC_CACHE).then((cache) => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() => cached);
+      return cached || network;
+    })
+  );
+});
