@@ -252,10 +252,10 @@ p { margin: 0 0 1em; }
 .hero-grid { display: grid; grid-template-columns: 1.05fr 0.8fr; gap: 48px; align-items: center; }
 .hero-slides { position: relative; min-height: 230px; }
 .hero-slide {
-  position: absolute; inset: 0; opacity: 0; transform: translateY(14px);
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); pointer-events: none;
+  position: absolute; inset: 0; opacity: 0;
+  transition: opacity 0.6s var(--ease); pointer-events: none;
 }
-.hero-slide.is-active { opacity: 1; transform: translateY(0); pointer-events: auto; position: relative; }
+.hero-slide.is-active { opacity: 1; pointer-events: auto; position: relative; }
 .hero-slide h1 { font-size: clamp(2.4rem, 5vw, 3.6rem); color: #fff; max-width: 15ch; }
 .hero-slide h1 em { font-style: normal; color: var(--pink-light); }
 .hero-slide p { color: var(--text-inverse-muted); font-size: 1.12rem; max-width: 46ch; }
