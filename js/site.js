@@ -762,7 +762,7 @@
       var bg = slideEl.getAttribute("data-bg");
       if (!bg) return;
       setTimeout(function () { setHeroBg(bg); }, 900);
-    }, 1100);
+    }, 800);
     initSlider(".quote-carousel", ".quote-slide", ".quote-dots", 7000);
     initCarousels();
     initFinder();
