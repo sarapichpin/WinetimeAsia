@@ -241,7 +241,7 @@ p { margin: 0 0 1em; }
 }
 .hero-bg {
   position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: right center;
-  opacity: 0; transition: opacity 1.1s var(--ease);
+  opacity: 0; transition: opacity 1.8s ease-in-out;
 }
 .hero-bg.is-visible { opacity: 1; }
 .hero-overlay {
