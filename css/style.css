@@ -235,9 +235,18 @@ p { margin: 0 0 1em; }
   color: var(--text-inverse); overflow: hidden;
 }
 .hero::before {
-  content: ""; position: absolute; inset: 0; opacity: 0.5;
+  content: ""; position: absolute; inset: 0; opacity: 0.5; z-index: 1;
   background-image: radial-gradient(circle at 85% 18%, rgba(230,58,27,0.35), transparent 45%),
                      radial-gradient(circle at 8% 85%, rgba(201,162,75,0.18), transparent 40%);
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: right center;
+  opacity: 0; transition: opacity 1.1s var(--ease);
+}
+.hero-bg.is-visible { opacity: 1; }
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background-image: linear-gradient(100deg, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.72) 45%, rgba(26,26,26,0.45) 100%);
 }
 .hero .container { position: relative; z-index: 2; padding-block: 90px; }
 .hero-grid { display: grid; grid-template-columns: 1.05fr 0.8fr; gap: 48px; align-items: center; }
@@ -339,6 +348,7 @@ p { margin: 0 0 1em; }
   background: linear-gradient(160deg, var(--paper-soft), var(--stone)); position: relative;
 }
 .bottle-art svg { width: 46%; height: 72%; filter: drop-shadow(0 14px 18px rgba(14,14,18,0.18)); }
+.bottle-art img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block; }
 .bottle-art .tag {
   position: absolute; top: 14px; left: 14px; background: var(--pink); color: #fff; font-size: 0.72rem;
   font-weight: 700; padding: 5px 10px; border-radius: var(--radius-pill); letter-spacing: 0.03em;

@@ -408,7 +408,7 @@
   /* ------------------------------------------------------------------ */
   /* Generic auto-rotating slider (hero + quotes)                        */
   /* ------------------------------------------------------------------ */
-  function initSlider(rootSelector, slideSelector, dotsSelector, interval) {
+  function initSlider(rootSelector, slideSelector, dotsSelector, interval, onShow) {
     var root = document.querySelector(rootSelector);
     if (!root) return;
     var slides = Array.prototype.slice.call(root.querySelectorAll(slideSelector));
@@ -430,6 +430,7 @@
       index = (i + slides.length) % slides.length;
       slides[index].classList.add("is-active");
       if (dots[index]) dots[index].classList.add("is-active");
+      if (onShow) onShow(index, slides[index]);
     }
     function next() { show(index + 1); }
     function restart() {
@@ -440,6 +441,29 @@
       dot.addEventListener("click", function () { show(i); restart(); });
     });
     restart();
+  }
+
+  /* ------------------------------------------------------------------ */
+  /* Hero background crossfade (staggered after the text slide change)  */
+  /* ------------------------------------------------------------------ */
+  function initHeroBackgrounds() {
+    var hero = document.querySelector(".hero");
+    if (!hero) return null;
+    var layers = Array.prototype.slice.call(hero.querySelectorAll(".hero-bg"));
+    if (layers.length < 2) return null;
+    var activeIndex = layers.findIndex(function (l) { return l.classList.contains("is-visible"); });
+    if (activeIndex < 0) activeIndex = 0;
+    return function setHeroBg(url) {
+      if (!url) return;
+      var current = layers[activeIndex];
+      if (current.style.backgroundImage.indexOf(url) !== -1) return;
+      var nextIndex = (activeIndex + 1) % layers.length;
+      var next = layers[nextIndex];
+      next.style.backgroundImage = "url('" + url + "')";
+      next.classList.add("is-visible");
+      current.classList.remove("is-visible");
+      activeIndex = nextIndex;
+    };
   }
 
   /* ------------------------------------------------------------------ */
@@ -721,7 +745,13 @@
   document.addEventListener("DOMContentLoaded", function () {
     mountChrome();
     initDrawer();
-    initSlider(".hero", ".hero-slide", ".hero-dots", 6000);
+    var setHeroBg = initHeroBackgrounds();
+    initSlider(".hero", ".hero-slide", ".hero-dots", 6000, function (i, slideEl) {
+      if (!setHeroBg) return;
+      var bg = slideEl.getAttribute("data-bg");
+      if (!bg) return;
+      setTimeout(function () { setHeroBg(bg); }, 450);
+    });
     initSlider(".quote-carousel", ".quote-slide", ".quote-dots", 7000);
     initCarousels();
     initFinder();

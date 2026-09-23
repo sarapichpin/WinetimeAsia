@@ -39,11 +39,14 @@
 <main id="main">
 
   <!-- ===================== HERO ===================== -->
-  <section class="hero" id="top" style="background-image: linear-gradient(100deg, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.72) 45%, rgba(26,26,26,0.45) 100%), url('images/home-hero.jpg'); background-size: cover; background-position: right center;">
+  <section class="hero" id="top">
+    <div class="hero-bg is-visible" style="background-image: url('images/home-hero.jpg');"></div>
+    <div class="hero-bg" style="background-image: url('images/home-hero2.jpg');"></div>
+    <div class="hero-overlay"></div>
     <div class="container hero-grid">
       <div>
         <div class="hero-slides">
-          <div class="hero-slide is-active">
+          <div class="hero-slide is-active" data-bg="images/home-hero.jpg">
             <span class="eyebrow">Winetime Cambodia</span>
             <h1>Discover the world of <em>exquisite wine</em></h1>
             <p>Direct-imported wines and spirits, curated for every palate and every occasion — paired with the best service, every time.</p>
@@ -52,7 +55,7 @@
               <a class="btn btn-outline" href="#finder">Find my wine</a>
             </div>
           </div>
-          <div class="hero-slide">
+          <div class="hero-slide" data-bg="images/home-hero2.jpg">
             <span class="eyebrow">This month</span>
             <h1>Discover the <em>collection of the month</em></h1>
             <p>A rotating edit of our sommelier's favourites — hand-picked reds, whites and sparkling bottles worth discovering right now.</p>
@@ -61,7 +64,7 @@
               <a class="btn btn-outline" href="#coup-de-coeur">Our Coup de Coeur</a>
             </div>
           </div>
-          <div class="hero-slide">
+          <div class="hero-slide" data-bg="images/home-hero3.jpg">
             <span class="eyebrow">Weddings &amp; events</span>
             <h1>Make your celebration <em>exceptional</em></h1>
             <p>From intimate dinners to full wedding receptions, our event packages take the guesswork out of pairing wine with your big day.</p>
@@ -264,7 +267,7 @@
 <script>
   // Populate the "Coup de Cœur" carousel with illustrative bottle cards.
   (function () {
-    var BOTTLE = '<svg viewBox="0 0 60 100" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><path d="M24 4h12v13l6 11v64a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4V28l6-11V4z"/><path d="M21 33h18"/></svg>';
+    var BOTTLE = '<img src="images/bottle-blank-label.jpg" alt="" loading="lazy">';
     var items = [
       { kind: "Sparkling", name: "Prosecco Spumante", meta: "Doc Spumante &middot; Sparkling White", tag: "Popular" },
       { kind: "White", name: "F&ucirc;m&eacute; 2020", meta: "Dry White &middot; Crisp &amp; mineral", tag: "" },

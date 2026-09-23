@@ -39,11 +39,14 @@
 <main id="main">
 
   <!-- ===================== HERO ===================== -->
-  <section class="hero" id="top" style="background-image: linear-gradient(100deg, rgba(26,26,26,0.92) 0%, rgba(26,26,26,0.72) 45%, rgba(26,26,26,0.45) 100%), url('../images/home-hero.jpg'); background-size: cover; background-position: right center;">
+  <section class="hero" id="top">
+    <div class="hero-bg is-visible" style="background-image: url('../images/home-hero.jpg');"></div>
+    <div class="hero-bg" style="background-image: url('../images/home-hero2.jpg');"></div>
+    <div class="hero-overlay"></div>
     <div class="container hero-grid">
       <div>
         <div class="hero-slides">
-          <div class="hero-slide is-active">
+          <div class="hero-slide is-active" data-bg="../images/home-hero.jpg">
             <span class="eyebrow">Winetime កម្ពុជា</span>
             <h1>ស្វែងរកពិភពនៃ<em>ស្រាដ៏ល្អឥតខ្ចោះ</em></h1>
             <p>ស្រា និងគ្រឿងស្រវឹងនាំចូលដោយផ្ទាល់ ជ្រើសរើសសម្រាប់រសជាតិគ្រប់បែបយ៉ាង និងគ្រប់ឱកាស — ភ្ជាប់ជាមួយសេវាកម្មល្អបំផុតជានិច្ច។</p>
@@ -52,7 +55,7 @@
               <a class="btn btn-outline" href="#finder">ស្វែងរកស្រារបស់ខ្ញុំ</a>
             </div>
           </div>
-          <div class="hero-slide">
+          <div class="hero-slide" data-bg="../images/home-hero2.jpg">
             <span class="eyebrow">ខែនេះ</span>
             <h1>ស្វែងរក<em>បណ្ដុំស្រានៃខែនេះ</em></h1>
             <p>ជម្រើសដែលប្រែប្រួលជានិច្ច នៃស្រាដែលអ្នកជំនាញរបស់យើងពេញចិត្ត — ស្រាក្រហម ស្រាស និងស្រាពពុះដែលគួរស្វែងរកឥឡូវនេះ។</p>
@@ -61,7 +64,7 @@
               <a class="btn btn-outline" href="#coup-de-coeur">ជម្រើសពេញចិត្តរបស់យើង</a>
             </div>
           </div>
-          <div class="hero-slide">
+          <div class="hero-slide" data-bg="../images/home-hero3.jpg">
             <span class="eyebrow">អាពាហ៍ពិពាហ៍ &amp; កម្មវិធីនានា</span>
             <h1>ធ្វើឲ្យពិធីរបស់អ្នក<em>ពិសេសបំផុត</em></h1>
             <p>ចាប់ពីអាហារពេលល្ងាចសំខាន់ រហូតដល់ពិធីជប់លៀងអាពាហ៍ពិពាហ៍ពេញលេញ កញ្ចប់កម្មវិធីរបស់យើងជួយជ្រើសរើសស្រាដ៏ត្រឹមត្រូវសម្រាប់ថ្ងៃសំខាន់របស់អ្នក។</p>
@@ -264,7 +267,7 @@
 <script>
   // Populate the "Coup de Cœur" carousel with illustrative bottle cards.
   (function () {
-    var BOTTLE = '<svg viewBox="0 0 60 100" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><path d="M24 4h12v13l6 11v64a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4V28l6-11V4z"/><path d="M21 33h18"/></svg>';
+    var BOTTLE = '<img src="../images/bottle-blank-label.jpg" alt="" loading="lazy">';
     var items = [
       { kind: "ពពុះ", name: "Prosecco Spumante", meta: "Doc Spumante · ស ពពុះ", tag: "ពេញនិយម" },
       { kind: "ស", name: "Fûmé 2020", meta: "ស ស្ងួត · មុត និងរសជាតិរ៉ែ", tag: "" },
