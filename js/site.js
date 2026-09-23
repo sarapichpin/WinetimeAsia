@@ -408,7 +408,7 @@
   /* ------------------------------------------------------------------ */
   /* Generic auto-rotating slider (hero + quotes)                        */
   /* ------------------------------------------------------------------ */
-  function initSlider(rootSelector, slideSelector, dotsSelector, interval, onShow) {
+  function initSlider(rootSelector, slideSelector, dotsSelector, interval, onShow, holdMs) {
     var root = document.querySelector(rootSelector);
     if (!root) return;
     var slides = Array.prototype.slice.call(root.querySelectorAll(slideSelector));
@@ -416,6 +416,7 @@
     if (slides.length < 2) return;
     var index = 0;
     var timer;
+    var pendingSwap;
 
     if (dotsWrap) {
       dotsWrap.innerHTML = slides.map(function (_, i) {
@@ -425,12 +426,22 @@
     var dots = dotsWrap ? Array.prototype.slice.call(dotsWrap.children) : [];
 
     function show(i) {
+      var newIndex = (i + slides.length) % slides.length;
+      if (newIndex === index) return;
+      clearTimeout(pendingSwap);
       slides[index].classList.remove("is-active");
       if (dots[index]) dots[index].classList.remove("is-active");
-      index = (i + slides.length) % slides.length;
-      slides[index].classList.add("is-active");
-      if (dots[index]) dots[index].classList.add("is-active");
-      if (onShow) onShow(index, slides[index]);
+      index = newIndex;
+      function activate() {
+        slides[index].classList.add("is-active");
+        if (dots[index]) dots[index].classList.add("is-active");
+        if (onShow) onShow(index, slides[index]);
+      }
+      if (holdMs) {
+        pendingSwap = setTimeout(activate, holdMs);
+      } else {
+        activate();
+      }
     }
     function next() { show(index + 1); }
     function restart() {
@@ -751,7 +762,7 @@
       var bg = slideEl.getAttribute("data-bg");
       if (!bg) return;
       setTimeout(function () { setHeroBg(bg); }, 900);
-    });
+    }, 1100);
     initSlider(".quote-carousel", ".quote-slide", ".quote-dots", 7000);
     initCarousels();
     initFinder();
