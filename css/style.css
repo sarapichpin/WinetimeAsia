@@ -344,13 +344,13 @@ p { margin: 0 0 1em; }
 }
 .bottle-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
 .bottle-art {
-  aspect-ratio: 4 / 5; display: flex; align-items: flex-end; justify-content: center;
+  aspect-ratio: 4 / 5; display: flex; align-items: flex-start; justify-content: center;
   background: linear-gradient(160deg, var(--paper-soft), var(--stone)); position: relative;
   min-height: 0; overflow: hidden; padding-bottom: 76px;
 }
 .bottle-art svg { width: 46%; height: 72%; filter: drop-shadow(0 14px 18px rgba(14,14,18,0.18)); }
 .bottle-art img {
-  width: 82%; height: 92%; object-fit: contain; object-position: center bottom; display: block;
+  width: 100%; height: 100%; object-fit: contain; object-position: center top; display: block;
   filter: drop-shadow(0 14px 18px rgba(14,14,18,0.18)); transition: transform 0.4s var(--ease);
 }
 .bottle-card:hover .bottle-art img, .bottle-card:active .bottle-art img, .bottle-card:focus-within .bottle-art img { transform: scale(1.07); }
