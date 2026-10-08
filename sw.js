@@ -3,7 +3,7 @@
  * App-shell caching for offline-friendly browsing.
  * Bump CACHE_VERSION whenever precached files change.
  */
-const CACHE_VERSION = "wt-v28";
+const CACHE_VERSION = "wt-v29";
 const STATIC_CACHE = CACHE_VERSION + "-static";
 const PAGES_CACHE = CACHE_VERSION + "-pages";
 
@@ -19,8 +19,8 @@ const PRECACHE_URLS = [
   "./cookie-policy.html",
   "./offline.html",
   "./404.html",
-  "./css/style.css",
-  "./js/site.js",
+  "./css/style.css?v=29",
+  "./js/site.js?v=29",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
