@@ -289,13 +289,17 @@
     track.innerHTML = items.map(function (i) {
       var search = encodeURIComponent(i.name.replace(/&[a-z]+;/g, ""));
       var bottle = '<img src="images/' + i.img + '" alt="" loading="lazy">';
+      var caption = (
+        '<div class="bottle-caption">' +
+          '<span class="bottle-kind">' + i.kind + "</span>" +
+          "<h3>" + i.name + "</h3>" +
+          '<p class="meta">' + i.meta + "</p>" +
+        "</div>"
+      );
       return (
         '<article class="bottle-card">' +
-          '<div class="bottle-art">' + (i.tag ? '<span class="tag">' + i.tag + "</span>" : "") + bottle + "</div>" +
+          '<div class="bottle-art">' + (i.tag ? '<span class="tag">' + i.tag + "</span>" : "") + bottle + caption + "</div>" +
           '<div class="bottle-body">' +
-            '<span class="bottle-kind">' + i.kind + "</span>" +
-            "<h3>" + i.name + "</h3>" +
-            '<p class="meta">' + i.meta + "</p>" +
             '<a class="btn btn-outline on-light btn-sm" href="https://winetime-asia.odoo.com/shop?search=' + search + '" target="_blank" rel="noopener">View in shop</a>' +
           "</div>" +
         "</article>"
