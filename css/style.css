@@ -322,17 +322,22 @@ a.feature-card { display: block; color: inherit; text-decoration: none; }
   height: 110px; padding: 16px 22px; display: flex; align-items: center; justify-content: center;
 }
 .logo-tile img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
-.vineyard { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; padding-block: 44px; }
+.vineyard { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding-block: 40px; }
 .vineyard + .vineyard { border-top: 1px solid var(--stone); }
 .vineyard--flip .vineyard-media { order: 2; }
-.vineyard-media img { width: 100%; height: auto; display: block; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
-.vineyard-logo { display: block; height: 52px; width: auto; max-width: 160px; object-fit: contain; object-position: left center; margin-bottom: 16px; }
-.vineyard-origin { display: block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink); margin-bottom: 6px; }
-.vineyard-body h3 { font-size: clamp(1.4rem, 2.6vw, 1.85rem); margin-bottom: 14px; }
-.vineyard-body p { color: var(--text-muted); }
-.vineyard-body .btn { margin-top: 8px; }
-@media (max-width: 860px) {
-  .vineyard { grid-template-columns: 1fr; gap: 24px; padding-block: 32px; }
+.vineyard-media img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
+.vineyard-body { position: relative; isolation: isolate; }
+.vineyard-body > *:not(.vineyard-logo) { position: relative; z-index: 1; }
+.vineyard-logo {
+  position: absolute; inset: 0; margin: auto; z-index: 0; pointer-events: none;
+  width: auto; height: auto; max-width: 72%; max-height: 72%; object-fit: contain; opacity: 0.1; filter: grayscale(1);
+}
+.vineyard-origin { display: block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink); margin-bottom: 4px; }
+.vineyard-body h3 { font-size: clamp(1.35rem, 2.4vw, 1.7rem); margin-bottom: 10px; }
+.vineyard-body p { color: var(--text-muted); font-size: 0.97rem; line-height: 1.6; margin-bottom: 14px; }
+.vineyard-body .btn { margin-top: 0; }
+@media (max-width: 1100px) {
+  .vineyard { grid-template-columns: 1fr; gap: 22px; padding-block: 30px; }
   .vineyard--flip .vineyard-media { order: 0; }
 }
 
