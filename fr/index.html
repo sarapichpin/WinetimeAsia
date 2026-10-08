@@ -265,26 +265,28 @@
 <div id="site-footer"></div>
 <script src="../js/site.js"></script>
 <script>
-  // Populate the "Coup de Cœur" carousel with illustrative bottle cards.
+  // Populate the "Coup de Coeur" carousel with real bottles from the shop.
   (function () {
-    var BOTTLE = '<img src="../images/bottle-blank-label.jpg" alt="" loading="lazy">';
     var items = [
-      { kind: "Effervescent", name: "Prosecco Spumante", meta: "Doc Spumante &middot; Blanc effervescent", tag: "Populaire" },
-      { kind: "Blanc", name: "F&ucirc;m&eacute; 2020", meta: "Blanc sec &middot; Vif et min&eacute;ral", tag: "" },
-      { kind: "Rouge", name: "Ch&acirc;teau Maillet 2018", meta: "Assemblage bordelais &middot; Rouge", tag: "Coup de c&oelig;ur sommelier" },
-      { kind: "Rouge", name: "Ch&acirc;teau d'Issan 2017", meta: "Margaux &middot; Rouge", tag: "" },
-      { kind: "Rouge", name: "Amarone, Casato Mastino", meta: "V&eacute;n&eacute;tie &middot; Rouge &middot; 2015", tag: "" },
-      { kind: "Ros&eacute;", name: "Rosapasso", meta: "V&eacute;n&eacute;tie &middot; Ros&eacute;", tag: "Nouveaut&eacute;" },
-      { kind: "Rouge", name: "Equilibre &mdash; Syrah", meta: "Sud de la France &middot; Rouge", tag: "" },
-      { kind: "Blanc", name: "Baronie Coraldo, Grillo", meta: "Sicile &middot; Blanc", tag: "" }
+      { img: "perle-noire.jpg", kind: "Rouge", name: "Perle Noire 2013", meta: "Domaine de Blanville &middot; IGP Pays d'Oc &middot; Cabernet Sauvignon", tag: "Nouveaut&eacute;" },
+      { img: "calypso.jpg", kind: "Rouge", name: "Calypso 2012", meta: "Domaine de Blanville &middot; AOP Gr&eacute;s de Montpellier &middot; Syrah", tag: "" },
+      { img: "blason-issan.jpg", kind: "Rouge", name: "Ch&acirc;teau Blason d'Issan 2017", meta: "AOC Margaux &middot; Cabernet Sauvignon, Merlot", tag: "" },
+      { img: "faugeres.jpg", kind: "Rouge", name: "Ch&acirc;teau Faug&egrave;res 2018", meta: "AOP Saint-&Eacute;milion Grand Cru &middot; Merlot", tag: "Coup de c&oelig;ur sommelier" },
+      { img: "equinox.jpg", kind: "Rouge", name: "Equinox &mdash; Merlot 2019", meta: "Domaine de l'Arjolle &middot; C&ocirc;te de Thongue", tag: "" },
+      { img: "pedesclaux.jpg", kind: "Rouge", name: "Ch&acirc;teau P&eacute;desclaux 2016", meta: "Grand Cru Class&eacute; 1855 &middot; AOC Pauillac &middot; Cabernet Sauvignon", tag: "Populaire" },
+      { img: "grande-cuvee.jpg", kind: "Rouge", name: "Grande Cuv&eacute;e 2016", meta: "Domaine de Blanville &middot; AOP Gr&eacute;s de Montpellier", tag: "Recommand&eacute;" },
+      { img: "fume-white.jpg", kind: "Blanc", name: "FUM&Eacute; 2020", meta: "Domaine de l'Arjolle &middot; IGP C&ocirc;te de Thongue &middot; Sauvignon Blanc", tag: "" },
+      { img: "maillet.jpg", kind: "Rouge", name: "Ch&acirc;teau Maillet 2018", meta: "Pomerol &middot; Assemblage bordelais", tag: "" },
+      { img: "dissan-gc.jpg", kind: "Rouge", name: "Ch&acirc;teau d'Issan 2017", meta: "Grand Cru Class&eacute; &middot; Margaux", tag: "Coup de c&oelig;ur sommelier" }
     ];
     var track = document.querySelector("#coup-de-coeur .carousel-track");
     if (!track) return;
     track.innerHTML = items.map(function (i) {
       var search = encodeURIComponent(i.name.replace(/&[a-z]+;/g, ""));
+      var bottle = '<img src="../images/' + i.img + '" alt="" loading="lazy">';
       return (
         '<article class="bottle-card">' +
-          '<div class="bottle-art">' + (i.tag ? '<span class="tag">' + i.tag + "</span>" : "") + BOTTLE + "</div>" +
+          '<div class="bottle-art">' + (i.tag ? '<span class="tag">' + i.tag + "</span>" : "") + bottle + "</div>" +
           '<div class="bottle-body">' +
             '<span class="bottle-kind">' + i.kind + "</span>" +
             "<h3>" + i.name + "</h3>" +

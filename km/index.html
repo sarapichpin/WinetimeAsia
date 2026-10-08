@@ -265,26 +265,28 @@
 <div id="site-footer"></div>
 <script src="../js/site.js"></script>
 <script>
-  // Populate the "Coup de Cœur" carousel with illustrative bottle cards.
+  // Populate the "Coup de Coeur" carousel with real bottles from the shop.
   (function () {
-    var BOTTLE = '<img src="../images/bottle-blank-label.jpg" alt="" loading="lazy">';
     var items = [
-      { kind: "ពពុះ", name: "Prosecco Spumante", meta: "Doc Spumante · ស ពពុះ", tag: "ពេញនិយម" },
-      { kind: "ស", name: "Fûmé 2020", meta: "ស ស្ងួត · មុត និងរសជាតិរ៉ែ", tag: "" },
-      { kind: "ក្រហម", name: "Château Maillet 2018", meta: "លាយបូឌូ · ក្រហម", tag: "ជម្រើសអ្នកជំនាញ" },
-      { kind: "ក្រហម", name: "Château d'Issan 2017", meta: "Margaux · ក្រហម", tag: "" },
-      { kind: "ក្រហម", name: "Amarone, Casato Mastino", meta: "Veneto · ក្រហម · 2015", tag: "" },
-      { kind: "រូស", name: "Rosapasso", meta: "Veneto · រូស", tag: "ថ្មី" },
-      { kind: "ក្រហម", name: "Equilibre — Syrah", meta: "ភាគខាងត្បូងបារាំង · ក្រហម", tag: "" },
-      { kind: "ស", name: "Baronie Coraldo, Grillo", meta: "Sicily · ស", tag: "" }
+      { img: "perle-noire.jpg", kind: "ក្រហម", name: "Perle Noire 2013", meta: "Domaine de Blanville · IGP Pays d'Oc · Cabernet Sauvignon", tag: "ថ្មី" },
+      { img: "calypso.jpg", kind: "ក្រហម", name: "Calypso 2012", meta: "Domaine de Blanville · AOP Grés de Montpellier · Syrah", tag: "" },
+      { img: "blason-issan.jpg", kind: "ក្រហម", name: "Château Blason d'Issan 2017", meta: "AOC Margaux · Cabernet Sauvignon, Merlot", tag: "" },
+      { img: "faugeres.jpg", kind: "ក្រហម", name: "Château Faugères 2018", meta: "AOP Saint-Émilion Grand Cru · Merlot", tag: "ជម្រើសអ្នកជំនាញ" },
+      { img: "equinox.jpg", kind: "ក្រហម", name: "Equinox — Merlot 2019", meta: "Domaine de l'Arjolle · Côte de Thongue", tag: "" },
+      { img: "pedesclaux.jpg", kind: "ក្រហម", name: "Château Pédesclaux 2016", meta: "Grand Cru Classé 1855 · AOC Pauillac · Cabernet Sauvignon", tag: "ពេញនិយម" },
+      { img: "grande-cuvee.jpg", kind: "ក្រហម", name: "Grande Cuvée 2016", meta: "Domaine de Blanville · AOP Grés de Montpellier", tag: "ណែនាំ" },
+      { img: "fume-white.jpg", kind: "ស", name: "FUMÉ 2020", meta: "Domaine de l'Arjolle · IGP Côte de Thongue · Sauvignon Blanc", tag: "" },
+      { img: "maillet.jpg", kind: "ក្រហម", name: "Château Maillet 2018", meta: "Pomerol · លាយបូឌូ", tag: "" },
+      { img: "dissan-gc.jpg", kind: "ក្រហម", name: "Château d'Issan 2017", meta: "Grand Cru Classé · Margaux", tag: "ជម្រើសអ្នកជំនាញ" }
     ];
     var track = document.querySelector("#coup-de-coeur .carousel-track");
     if (!track) return;
     track.innerHTML = items.map(function (i) {
-      var search = encodeURIComponent(i.name);
+      var search = encodeURIComponent(i.name.replace(/&[a-z]+;/g, ""));
+      var bottle = '<img src="../images/' + i.img + '" alt="" loading="lazy">';
       return (
         '<article class="bottle-card">' +
-          '<div class="bottle-art">' + (i.tag ? '<span class="tag">' + i.tag + "</span>" : "") + BOTTLE + "</div>" +
+          '<div class="bottle-art">' + (i.tag ? '<span class="tag">' + i.tag + "</span>" : "") + bottle + "</div>" +
           '<div class="bottle-body">' +
             '<span class="bottle-kind">' + i.kind + "</span>" +
             "<h3>" + i.name + "</h3>" +

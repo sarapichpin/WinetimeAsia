@@ -511,6 +511,32 @@
         update();
       });
       window.addEventListener("resize", update);
+
+      // Touch / pointer swipe: drag the track with a finger (or mouse).
+      var dragging = false, startX = 0, startPos = 0;
+      track.addEventListener("pointerdown", function (e) {
+        dragging = true;
+        startX = e.clientX;
+        startPos = pos;
+        track.style.transition = "none";
+        if (track.setPointerCapture) track.setPointerCapture(e.pointerId);
+      });
+      track.addEventListener("pointermove", function (e) {
+        if (!dragging) return;
+        var delta = e.clientX - startX;
+        pos = Math.max(0, Math.min(maxScroll(), startPos - delta));
+        track.style.transform = "translateX(" + (-pos) + "px)";
+      });
+      function endDrag() {
+        if (!dragging) return;
+        dragging = false;
+        track.style.transition = "";
+        update();
+      }
+      track.addEventListener("pointerup", endDrag);
+      track.addEventListener("pointercancel", endDrag);
+      track.addEventListener("pointerleave", function () { if (dragging) endDrag(); });
+
       update();
     });
   }

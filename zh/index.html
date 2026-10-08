@@ -265,26 +265,28 @@
 <div id="site-footer"></div>
 <script src="../js/site.js"></script>
 <script>
-  // Populate the "Coup de Cœur" carousel with illustrative bottle cards.
+  // Populate the "Coup de Coeur" carousel with real bottles from the shop.
   (function () {
-    var BOTTLE = '<img src="../images/bottle-blank-label.jpg" alt="" loading="lazy">';
     var items = [
-      { kind: "起泡酒", name: "Prosecco Spumante", meta: "Doc Spumante · 起泡白葡萄酒", tag: "热门" },
-      { kind: "白葡萄酒", name: "Fûmé 2020", meta: "干白 · 清爽矿物感", tag: "" },
-      { kind: "红葡萄酒", name: "Château Maillet 2018", meta: "波尔多混酿 · 红葡萄酒", tag: "侍酒师推荐" },
-      { kind: "红葡萄酒", name: "Château d'Issan 2017", meta: "玛歌产区 · 红葡萄酒", tag: "" },
-      { kind: "红葡萄酒", name: "Amarone, Casato Mastino", meta: "威尼托 · 红葡萄酒 · 2015", tag: "" },
-      { kind: "桃红葡萄酒", name: "Rosapasso", meta: "威尼托 · 桃红葡萄酒", tag: "新品" },
-      { kind: "红葡萄酒", name: "Equilibre — Syrah", meta: "法国南部 · 红葡萄酒", tag: "" },
-      { kind: "白葡萄酒", name: "Baronie Coraldo, Grillo", meta: "西西里 · 白葡萄酒", tag: "" }
+      { img: "perle-noire.jpg", kind: "红葡萄酒", name: "Perle Noire 2013", meta: "Domaine de Blanville · IGP Pays d'Oc · 赤霞珠", tag: "新品" },
+      { img: "calypso.jpg", kind: "红葡萄酒", name: "Calypso 2012", meta: "Domaine de Blanville · AOP Grés de Montpellier · 西拉", tag: "" },
+      { img: "blason-issan.jpg", kind: "红葡萄酒", name: "Château Blason d'Issan 2017", meta: "AOC玛歌产区 · 赤霞珠、梅洛", tag: "" },
+      { img: "faugeres.jpg", kind: "红葡萄酒", name: "Château Faugères 2018", meta: "AOP圣爱美浓特级园 · 梅洛", tag: "侍酒师推荐" },
+      { img: "equinox.jpg", kind: "红葡萄酒", name: "Equinox — 梅洛 2019", meta: "Domaine de l'Arjolle · Côte de Thongue", tag: "" },
+      { img: "pedesclaux.jpg", kind: "红葡萄酒", name: "Château Pédesclaux 2016", meta: "1855名庄分级 · AOC波雅克 · 赤霞珠", tag: "热门" },
+      { img: "grande-cuvee.jpg", kind: "红葡萄酒", name: "Grande Cuvée 2016", meta: "Domaine de Blanville · AOP Grés de Montpellier", tag: "推荐" },
+      { img: "fume-white.jpg", kind: "白葡萄酒", name: "FUMÉ 2020", meta: "Domaine de l'Arjolle · IGP Côte de Thongue · 长相思", tag: "" },
+      { img: "maillet.jpg", kind: "红葡萄酒", name: "Château Maillet 2018", meta: "波美侯 · 波尔多混酿", tag: "" },
+      { img: "dissan-gc.jpg", kind: "红葡萄酒", name: "Château d'Issan 2017", meta: "名庄分级 · 玛歌产区", tag: "侍酒师推荐" }
     ];
     var track = document.querySelector("#coup-de-coeur .carousel-track");
     if (!track) return;
     track.innerHTML = items.map(function (i) {
-      var search = encodeURIComponent(i.name);
+      var search = encodeURIComponent(i.name.replace(/&[a-z]+;/g, ""));
+      var bottle = '<img src="../images/' + i.img + '" alt="" loading="lazy">';
       return (
         '<article class="bottle-card">' +
-          '<div class="bottle-art">' + (i.tag ? '<span class="tag">' + i.tag + "</span>" : "") + BOTTLE + "</div>" +
+          '<div class="bottle-art">' + (i.tag ? '<span class="tag">' + i.tag + "</span>" : "") + bottle + "</div>" +
           '<div class="bottle-body">' +
             '<span class="bottle-kind">' + i.kind + "</span>" +
             "<h3>" + i.name + "</h3>" +

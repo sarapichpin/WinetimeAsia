@@ -360,7 +360,8 @@ p { margin: 0 0 1em; }
 .bottle-body .btn { margin-top: auto; }
 
 .carousel-track-wrap { overflow: hidden; }
-.carousel-track { display: flex; gap: 24px; transition: transform 0.5s var(--ease); }
+.carousel-track { display: flex; gap: 24px; transition: transform 0.5s var(--ease); touch-action: pan-y; cursor: grab; }
+.carousel-track:active { cursor: grabbing; }
 .carousel-track > * { flex: 0 0 clamp(220px, 26vw, 280px); }
 .carousel-nav { display: flex; justify-content: flex-end; gap: 10px; margin-bottom: 20px; }
 .carousel-nav button {
