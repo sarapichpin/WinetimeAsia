@@ -311,6 +311,31 @@ p { margin: 0 0 1em; }
 .feature-card h3 { font-size: 1.15rem; }
 .feature-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0; }
 
+a.feature-card { display: block; color: inherit; text-decoration: none; }
+
+/* -------------------------------------------------------------------------- */
+/* Vineyards page                                                             */
+/* -------------------------------------------------------------------------- */
+.logo-wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px; }
+.logo-tile {
+  background: var(--paper); border: 1px solid var(--stone); border-radius: var(--radius-lg);
+  height: 110px; padding: 16px 22px; display: flex; align-items: center; justify-content: center;
+}
+.logo-tile img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.vineyard { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; padding-block: 44px; }
+.vineyard + .vineyard { border-top: 1px solid var(--stone); }
+.vineyard--flip .vineyard-media { order: 2; }
+.vineyard-media img { width: 100%; height: auto; display: block; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
+.vineyard-logo { display: block; height: 52px; width: auto; max-width: 160px; object-fit: contain; object-position: left center; margin-bottom: 16px; }
+.vineyard-origin { display: block; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pink); margin-bottom: 6px; }
+.vineyard-body h3 { font-size: clamp(1.4rem, 2.6vw, 1.85rem); margin-bottom: 14px; }
+.vineyard-body p { color: var(--text-muted); }
+.vineyard-body .btn { margin-top: 8px; }
+@media (max-width: 860px) {
+  .vineyard { grid-template-columns: 1fr; gap: 24px; padding-block: 32px; }
+  .vineyard--flip .vineyard-media { order: 0; }
+}
+
 .on-dark .feature-card { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); }
 .on-dark .feature-card p { color: var(--text-inverse-muted); }
 .on-dark .feature-card h3 { color: #fff; }

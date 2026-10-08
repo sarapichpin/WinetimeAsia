@@ -17,7 +17,7 @@
   var PAGE_FILE = {
     home: "index.html", about: "about.html", event: "event-wedding.html",
     bar: "bar-a-vin.html", contact: "contact.html", blog: "blog.html",
-    forum: "forum.html", cookie: "cookie-policy.html"
+    forum: "forum.html", cookie: "cookie-policy.html", vineyards: "vineyards.html"
   };
 
   /* ------------------------------------------------------------------ */

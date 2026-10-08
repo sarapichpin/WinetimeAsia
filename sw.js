@@ -3,7 +3,7 @@
  * App-shell caching for offline-friendly browsing.
  * Bump CACHE_VERSION whenever precached files change.
  */
-const CACHE_VERSION = "wt-v33";
+const CACHE_VERSION = "wt-v34";
 const STATIC_CACHE = CACHE_VERSION + "-static";
 const PAGES_CACHE = CACHE_VERSION + "-pages";
 
@@ -11,6 +11,7 @@ const PRECACHE_URLS = [
   "./",
   "./index.html",
   "./about.html",
+  "./vineyards.html",
   "./event-wedding.html",
   "./bar-a-vin.html",
   "./contact.html",
@@ -19,8 +20,8 @@ const PRECACHE_URLS = [
   "./cookie-policy.html",
   "./offline.html",
   "./404.html",
-  "./css/style.css?v=33",
-  "./js/site.js?v=33",
+  "./css/style.css?v=34",
+  "./js/site.js?v=34",
   "./manifest.webmanifest",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
@@ -30,6 +31,7 @@ const PRECACHE_URLS = [
   "./icons/apple-touch-icon.png",
   "./fr/index.html",
   "./fr/about.html",
+  "./fr/vineyards.html",
   "./fr/event-wedding.html",
   "./fr/bar-a-vin.html",
   "./fr/contact.html",
@@ -38,6 +40,7 @@ const PRECACHE_URLS = [
   "./fr/cookie-policy.html",
   "./zh/index.html",
   "./zh/about.html",
+  "./zh/vineyards.html",
   "./zh/event-wedding.html",
   "./zh/bar-a-vin.html",
   "./zh/contact.html",
@@ -46,6 +49,7 @@ const PRECACHE_URLS = [
   "./zh/cookie-policy.html",
   "./km/index.html",
   "./km/about.html",
+  "./km/vineyards.html",
   "./km/event-wedding.html",
   "./km/bar-a-vin.html",
   "./km/contact.html",

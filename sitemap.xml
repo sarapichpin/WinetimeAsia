@@ -17,6 +17,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.winetime.asia/about.html"/>
   </url>
   <url>
+    <loc>https://www.winetime.asia/vineyards.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/vineyards.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/vineyards.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://www.winetime.asia/zh/vineyards.html"/>
+    <xhtml:link rel="alternate" hreflang="km" href="https://www.winetime.asia/km/vineyards.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.winetime.asia/vineyards.html"/>
+  </url>
+  <url>
     <loc>https://www.winetime.asia/event-wedding.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.winetime.asia/event-wedding.html"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.winetime.asia/fr/event-wedding.html"/>
